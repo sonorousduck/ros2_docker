@@ -55,28 +55,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN apt-get update && apt-get install ros-${ROS_DISTRO}-gtsam cmake vim tmux -y && echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc 
 
-# Install Livox SDK (Needed for Fast LIO-SAM)
-# RUN git clone https://github.com/Livox-SDK/Livox-SDK2.git && cd ./Livox-SDK2/ && mkdir build && cd build && cmake .. && make -j && make install
-
-# Install ros2 driver for Livox SDK 
-# RUN git clone https://github.com/Livox-SDK/livox_ros_driver2.git ws_livox/src/livox_ros_driver2 && \
-#     . /opt/ros/${ROS_DISTRO}/setup.sh && \
-#     cd ws_livox/src/livox_ros_driver2 && \
-#     ./build.sh ${ROS_DISTRO} && \
-#     echo "source /ws_livox/install/setup.bash" >> ~/.bashrc
-
-# # Install Fast-LIO and Ouster package
-# RUN mkdir -p /docker_yride/other_drivers_ros2_ws/src && \
-#   cd /docker_yride/other_drivers_ros2_ws/src && \
-#   git clone -b ros2 --recurse-submodules https://github.com/ouster-lidar/ouster-ros.git && \
-#   git clone https://github.com/BYU-FRoSt-Lab/FAST_LIO.git --recursive && \
-#   cd FAST_LIO && \
-#   git checkout ROS2 && git pull && \
-#   cd /docker_yride/other_drivers_ros2_ws && \
-#   . /ws_livox/install/setup.sh && \
-#   rosdep install --from-paths src --ignore-src -y && \
-#   colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release && \
-#   echo "source /docker_yride/other_drivers_ros2_ws/install/setup.bash" >> ~/.bashrc
 
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
 
@@ -98,4 +76,3 @@ WORKDIR ${ROS_WS}
 
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc && \
     echo "source ${DRIVER_WS}/install/setup.bash" >> ~/.bashrc
-    # echo "source /ws_livox/install/setup.bash" >> ~/.bashrc
